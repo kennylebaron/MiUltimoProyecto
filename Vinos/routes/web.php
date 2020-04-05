@@ -15,6 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hola', function () {
-    return view('welcome');
+Route::get('/profile', function () {
+    return view('profile');
+});
+Route::get('/profile/editar', function () {
+    return "Estas editando";
+});
+Route::get('/ver/{id}', 'ProfileController@index');
+
+Route::group(['prefix'=>'admin','as'=>'admin'],function(){
+    Route::get('/', 'AdminController@index');
+
+    Route::get('/usuarios', 'UsersController@index');
+    Route::resource('usuarios','UsersController');
+
+    Route::get('/vinos', 'VinoController@index');
+    Route::resource('vinos','VinoController');
 });
